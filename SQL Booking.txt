@@ -1,0 +1,107 @@
+CREATE DATABASE GuesthouseDB;
+
+//
+
+USE GuesthouseDB;
+
+CREATE TABLE Rooms (
+    RoomID INT PRIMARY KEY IDENTITY(1,1),
+    RoomType NVARCHAR(50),
+    PricePerNight DECIMAL(10, 2)
+);
+
+CREATE TABLE Bookings (
+    BookingID INT PRIMARY KEY IDENTITY(1,1),
+    RoomID INT FOREIGN KEY REFERENCES Rooms(RoomID),
+    GuestName NVARCHAR(100),
+    CheckInDate DATE,
+    CheckOutDate DATE,
+    TotalPrice DECIMAL(10, 2)
+);
+
+INSERT INTO Rooms (RoomType, PricePerNight)
+VALUES ('Standard Single', 850.00), ('Standard Double', 1055.00);
+
+//
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+
+//
+
+public class Room
+{
+    public int RoomID { get; set; }
+    public string RoomType { get; set; }
+    public decimal PricePerNight { get; set; }
+}
+
+public class Booking
+{
+    public int BookingID { get; set; }
+    public int RoomID { get; set; }
+    public string GuestName { get; set; }
+    public DateTime CheckInDate { get; set; }
+    public DateTime CheckOutDate { get; set; }
+    public decimal TotalPrice { get; set; }
+
+    public Room Room { get; set; }
+}
+
+//
+
+public class GuesthouseContext : DbContext
+{
+    public DbSet<Room> Rooms { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Your_Connection_String_Here");
+    }
+}
+//
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=GuesthouseDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
+
+//
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=GuesthouseDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
+
+//
+
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+//
+
+[HttpPost]
+public IActionResult BookRoom(int roomId, string guestName, DateTime checkInDate, DateTime checkOutDate)
+{
+    var room = _context.Rooms.Find(roomId);
+    if (room == null) return NotFound();
+
+    var booking = new Booking
+    {
+        RoomID = roomId,
+        GuestName = guestName,
+        CheckInDate = checkInDate,
+        CheckOutDate = checkOutDate,
+        TotalPrice = (checkOutDate - checkInDate).Days * room.PricePerNight
+    };
+
+    _context.Bookings.Add(booking);
+    _context.SaveChanges();
+
+    return RedirectToAction("BookingConfirmation", new { id = booking.BookingID });
+}
+

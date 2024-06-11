@@ -1,0 +1,130 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Ubuntu&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Our Rates</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+       
+    <nav>
+        <div class="nich">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <i class="fa fa-bars"></i>
+        </label>
+        <img src="use.png" width="290" height="65">
+          <ul> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="About Us.html">About us</a></li>
+                <li><a href="Photo Gallery.html">Photo Gallery</a></li>
+                <li><a href="Contact Us.html">Contact Us</a></li>
+                <li><a href="Our Rates.html">Our Rates</a></li>
+                <li><a href="Directions.html">Directions</a></li>
+       
+      </ul>
+  </div> 
+   
+   </nav>  
+   <div class="OurRatesbg">
+   
+        
+        <div class="container">
+         <br>
+         <h1>Book a Room</h1>
+         <style>
+            body {
+  font-family: sans-serif; /* Set a default font for the body */
+  color: #fff;
+ 
+}
+
+.form-group {
+  margin-bottom: 1rem; /* Add some space between form elements */
+}
+
+label {
+  display: block; /* Make labels appear on separate lines */
+  margin-bottom: 0.5rem;
+ 
+}
+
+select, input[type="text"], input[type="email"], input[type="date"] {
+  width: 55%; /* Make form elements full width */
+  padding: 0.5rem; /* Add some padding for better look */
+  border: 1px solid#009688; /* Add a border for better visibility */
+ 
+}
+
+input[type="submit"] {
+  background-color: #494949; /* Green button color */
+  color:#009688; /* White button text */
+  padding: 1rem 2rem; /* Adjust button padding */
+  border: none; /* Remove button border */
+  border-radius: 4px; /* Add rounded corners */
+  cursor: pointer; /* Indicate clickable button */
+}
+
+form {
+  text-align: center; /* Center the entire form horizontally */
+}
+         </style>
+         <form method="post" action="/booking.php">
+             <label for="room_type">Room type:</label>
+             <select name="room_type" id="room_type">
+                 <option value="Single Standard">Single Standard - R850 </option>
+                 <option value="Double Standard">Double Standard - R1050 </option>
+             </select><br><br>
+             
+             <label for="check_in">Check-in Date:</label>
+             <input type="date" id="check_in" name="check_in" required><br><br>
+             
+             <label for="check_out">Check-out Date:</label>
+             <input type="date" id="check_out" name="check_out" required><br><br>
+             
+             <label for="guest_name">Guest Name:</label>
+             <input type="text" id="guest_name" name="guest_name" required><br><br>
+
+             <label for="contact_number">Contact Number:</label>
+             <input type="text" id="contact_number" name="contact_number" required><br><br>
+             
+             <label for="guest_email">Guest Email:</label>
+             <input type="email" id="guest_email" name="guest_email" required><br><br>
+             
+             <input type="submit" value="Book Now">
+         </form>
+                <br>
+                <br>
+                <div class="box">
+                    <h2>Extra</h2>
+                    
+                    
+                    <p>   Breakfast: R110.00</p>
+                    <br>
+                    <p>   Lunch pack: R130.00</p>
+                    <br>
+                    <p>   Standard dinner: R215.00 including two beverages of choice.</p>
+                    <br>
+                    <p>   Luxury Dinner: R265.00 including two beverages of choice.</p>
+                    <br>
+                    <p>   All meals are set menu. Arrangements can be made before 10AM for <br>different dietary requirements which must be communicated to the owner.</p>
+                    <br>
+                    <p>   We have a fully licenced bar.</p>
+                    <br>
+                    <p>   All meals are offered as set menus. Requests for alternative dietary options <br> must be communicated to the owners before 10:00 AM to ensure proper arrangements.</p>
+                    
+                    
+                
+            </div>
+        </div>
+
+            
+        </body>    
+
+
+</html>
+      
+
